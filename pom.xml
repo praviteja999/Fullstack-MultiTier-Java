@@ -84,15 +84,13 @@
         <repository>
             <id>maven-releases</id>
             <url>http://43.205.212.9:8081/repository/maven-releases/</url>
-		        <username>admin</username>
-        <password>fullstackcicd</password>
+
 
         </repository>
         <snapshotRepository>
             <id>maven-snapshots</id>
             <url>http://43.205.212.9:8081/repository/maven-snapshots/</url>
-		        <username>admin</username>
-        <password>fullstackcicd</password>
+
 
         </snapshotRepository>
     </distributionManagement>
