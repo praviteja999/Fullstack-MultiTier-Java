@@ -95,7 +95,7 @@ pipeline {
             steps {
                 script{
                 withDockerRegistry(credentialsId: 'dockerhub-token') {
-                    sh "docker push ${IMAGE_NAME}:${TAG} ."
+                    sh "docker push ${IMAGE_NAME}:${TAG}"
                     
                     }
 
@@ -118,16 +118,16 @@ pipeline {
             steps {
                 script {
                     // Use GitHub credentials for Jenkins
-                    withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                        sh """
-                        git config --global user.email "sivakumarjd@gmail.com"
-                        git config --global user.name "Sivakumar M"
-                        git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/sivakumarjd/Fullstack-MultiTier-Java.git
-                        git pull origin main
-                        git add ds.yml
-                        git commit -m "Update image to ${IMAGE_NAME}:${TAG}"
-                        git push origin main
-                        """
+                withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                sh """
+                git config --global user.email "sivakumarjd@gmail.com"
+                git config --global user.name "sivakumarjd"
+                git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/sivakumarjd/Fullstack-MultiTier-Java.git
+                git pull origin main
+                git add .
+                git commit -m "Update image to ${IMAGE_NAME}:${TAG}"
+                git push origin main
+                """
                     }
                 }
             }
