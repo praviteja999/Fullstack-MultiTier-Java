@@ -75,7 +75,7 @@ pipeline {
         stage('Build & Tag Docker Image') {
             steps {
                 script{
-                withDockerRegistry(credentialsId: 'dockerhub-token') {
+                withDockerRegistry(credentialsId: 'docker') {
                     sh 'docker system prune -f'
                     sh 'docker container prune -f'
                     sh "docker build -t ${IMAGE_NAME}:${TAG} ."
