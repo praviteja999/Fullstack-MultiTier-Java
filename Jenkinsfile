@@ -2,12 +2,12 @@ pipeline {
     agent any
     
     tools {
-        maven 'maven3'
+        maven 'maven'
     }
     
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
-        IMAGE_NAME = 'repodir/bankapp'
+        IMAGE_NAME = 'sriram8788/bankapp'
         TAG = "${env.BUILD_NUMBER}"
         
     }
@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/sivakumarjd/Fullstack-MultiTier-Java.git'
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/praviteja999/Fullstack-MultiTier-Java.git'
 
             }
         }
