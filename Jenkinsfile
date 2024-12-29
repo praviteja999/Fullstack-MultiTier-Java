@@ -41,7 +41,7 @@ pipeline {
         
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonar') {
+                withSonarQubeEnv('sonar-server') {
                 sh '$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=multitier -Dsonar.projectName=multitier -Dsonar.java.binaries=target'
                 }
 
@@ -76,6 +76,8 @@ pipeline {
             steps {
                 script{
                 withDockerRegistry(credentialsId: 'dockerhub-token') {
+                    sh 'docker system prune -f'
+                    sh 'docker container prune -f'
                     sh "docker build -t ${IMAGE_NAME}:${TAG} ."
                     
                     }
@@ -120,9 +122,9 @@ pipeline {
                     // Use GitHub credentials for Jenkins
                 withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                 sh """
-                git config --global user.email "sivakumarjd@gmail.com"
-                git config --global user.name "sivakumarjd"
-                git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/sivakumarjd/Fullstack-MultiTier-Java.git
+                git config --global user.email "praviteja999@protonmail.com"
+                git config --global user.name "praviteja999"
+                git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/praviteja999/Fullstack-MultiTier-Java.git
                 git pull origin main
                 git add .
                 git commit -m "Update image to ${IMAGE_NAME}:${TAG}"
@@ -134,7 +136,7 @@ pipeline {
         }
         
         
-        stage('Kubernetes Deployment') {
+        /*stage('Kubernetes Deployment') {
             steps {
                 withKubeConfig(caCertificate: '', clusterName: 'devops-cluster', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://E1F67E40D41E01B2E0EE8B5DEFBE9E90.gr7.ap-south-1.eks.amazonaws.com') {
                 sh "kubectl apply -f ds.yml"
@@ -150,7 +152,7 @@ pipeline {
                 sh "kubectl get svc -n webapps"
                 }
             }
-        }
+        }*/
 
     }
 }
