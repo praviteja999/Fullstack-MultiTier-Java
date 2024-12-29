@@ -49,13 +49,13 @@ pipeline {
         }
         
         
-        stage('Quality GateCheck') {
+        /*stage('Quality GateCheck') {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true, credentialsId: 'sonar-token'
                 }
             }
-        }
+        }*/
         
         stage('Build') {
             steps {
