@@ -9,6 +9,8 @@ pipeline {
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = 'sriram8788/bankapp'
         TAG = "${env.BUILD_NUMBER}"
+        GIT_REPO_NAME = "Fullstack-MultiTier-Java"
+        GIT_USER_NAME = "praviteja999"
         
     }
 
@@ -120,11 +122,11 @@ pipeline {
             steps {
                 script {
                     // Use GitHub credentials for Jenkins
-                withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USER_NAME', passwordVariable: 'github-token')]) {
                 sh """
                 git config --global user.email "praviteja999@protonmail.com"
                 git config --global user.name "praviteja999"
-                git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/praviteja999/Fullstack-MultiTier-Java.git
+                git remote set-url origin https://${GIT_USER_NAME}:${github-token}@github.com/praviteja999/Fullstack-MultiTier-Java.git
                 git pull origin main
                 git add .
                 git commit -m "Update image to ${IMAGE_NAME}:${TAG}"
