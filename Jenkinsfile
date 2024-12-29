@@ -65,14 +65,14 @@ pipeline {
             }
         }
         
-    /*stage('Publish Artifact To Nexus') {
+       stage('Publish Artifact To Nexus') {
             steps {
                 withMaven(globalMavenSettingsConfig: 'maven-settings', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
                 sh "mvn deploy -DskipTests=true"
                     
                 }
             }
-        }*/
+        }
         
         stage('Build & Tag Docker Image') {
             steps {
@@ -140,27 +140,6 @@ pipeline {
                 }
             }
         }
-
-        /*stage('Upload Deployment File') {
-            environment {
-                GIT_REPO_NAME = "Fullstack-MultiTier-Java.git"
-                GIT_USER_NAME = "praviteja999"
-            }
-            steps {
-                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
-                    sh '''
-                        git config user.email "praviteja999@protonmail.com"
-                        git config user.name "praviteja999"
-                        #BUILD_NUMBER=${BUILD_NUMBER}
-                        #cp Manifests/dss.yaml Production/
-                        #sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Production/dss.yaml
-                        git add .
-                        git commit -m "Update Deployment Manifest for Production"
-                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-                    '''
-                }
-            }
-        }*/
         
         
         /*stage('Kubernetes Deployment') {
