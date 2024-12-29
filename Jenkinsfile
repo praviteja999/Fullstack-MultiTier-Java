@@ -42,7 +42,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
-                sh "'$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=multitier3 -Dsonar.projectName=multitier -Dsonar.java.binaries=target'"
+                sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=multitier3 -Dsonar.projectName=multitier -Dsonar.java.binaries=target"
                 }
 
             }
