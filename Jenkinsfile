@@ -63,14 +63,14 @@ pipeline {
             }
         }
         
-        stage('Publish Artifact To Nexus') {
+    /*stage('Publish Artifact To Nexus') {
             steps {
                 withMaven(globalMavenSettingsConfig: 'maven-settings', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
                 sh "mvn deploy -DskipTests=true"
                     
                 }
             }
-        }
+        }*/
         
         stage('Build & Tag Docker Image') {
             steps {
