@@ -118,7 +118,11 @@ pipeline {
             }
         }
         
-        /*stage('Commit and Push Changes') {
+        stage('Commit and Push Changes') {
+            environment {
+                GIT_REPO_NAME = "Fullstack-MultiTier-Java.git"
+                GIT_USER_NAME = "praviteja999"
+            }        
             steps {
                 script {
                     // Use GitHub credentials for Jenkins
@@ -126,7 +130,7 @@ pipeline {
                 sh """
                 git config --global user.email "praviteja999@protonmail.com"
                 git config --global user.name "praviteja999"
-                git remote set-url origin https://${GIT_USER_NAME}:${github-token}@github.com/praviteja999/Fullstack-MultiTier-Java.git
+                git remote set-url origin https://${GITHUB_TOKEN}@github.com/praviteja999/Fullstack-MultiTier-Java.git
                 git pull origin main
                 git add .
                 git commit -m "Update image to ${IMAGE_NAME}:${TAG}"
@@ -135,9 +139,9 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
 
-        stage('Upload Deployment File') {
+        /*stage('Upload Deployment File') {
             environment {
                 GIT_REPO_NAME = "Fullstack-MultiTier-Java.git"
                 GIT_USER_NAME = "praviteja999"
@@ -156,7 +160,7 @@ pipeline {
                     '''
                 }
             }
-        }
+        }*/
         
         
         /*stage('Kubernetes Deployment') {
