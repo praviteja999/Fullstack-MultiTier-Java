@@ -122,7 +122,7 @@ pipeline {
             steps {
                 script {
                     // Use GitHub credentials for Jenkins
-                withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USER_NAME', passwordVariable: 'github-token')]) {
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                 sh """
                 git config --global user.email "praviteja999@protonmail.com"
                 git config --global user.name "praviteja999"
